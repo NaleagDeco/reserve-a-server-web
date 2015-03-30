@@ -1,0 +1,17 @@
+{
+  "name": "reserve-a-server-web",
+  "version": "0.0.0",
+  "authors": [
+    "Gaelan D'costa <gdcosta@gmail.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "All Rights Reserved",
+  "private": true,
+  "dependencies": {
+    "react-bootstrap": "~0.19.1",
+    "jsx-requirejs-plugin": "~0.6.0",
+    "requirejs": "~2.1.16"
+  }
+}
