@@ -2,7 +2,7 @@ define(['react', 'react-bootstrap', 'reactfire', 'firebase'], function(React, Re
     var ListGroup = ReactBootstrap.ListGroup;
     var ListGroupItem = ReactBootstrap.ListGroupItem;
     var Panel = ReactBootstrap.Panel;
-    
+
     var ServerList = React.createClass({
         mixins: [ReactFireMixin],
         componentWillMount: function() {
@@ -27,15 +27,24 @@ define(['react', 'react-bootstrap', 'reactfire', 'firebase'], function(React, Re
             return {servers: {}}
         }
     });
-    
+
     var Server = React.createClass({
+        mixins: [ReactFireMixin],
+        componentWillMount: function() {
+            var firebaseRef = new Firebase("https://dazzling-fire-7049.firebaseio.com/servers/");
+            this.bindAsObject(firebaseRef, "servers");
+        },
         render: function() {
             return (
                     <ListGroupItem>
-                    <input type="checkbox" readOnly checked={this.props.isInUse}></input>
+                    <input onChange={ this.onChange } type="checkbox" readOnly checked={this.props.isInUse}></input>
                     <label>{this.props.name}</label>
                     </ListGroupItem>
             );
+        },
+        onChange: function(e) {
+            var node = this.firebaseRefs["servers"].child(this.props.name);
+            node.set(!this.props.isInUse);
         }
     });
 
